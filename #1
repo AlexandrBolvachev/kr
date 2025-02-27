@@ -1,0 +1,19 @@
+import sys
+import json
+
+text = list(map(str.strip, sys.stdin))
+out = {}
+for n, line in enumerate(text, 1):
+    for word in line.split():
+        cnt = 0
+        for l in word:
+            if l.lower() in 'eyuioa':
+                cnt += 1
+        if cnt % 2 == len(word) % 2:
+            if n in out:
+                out[n].append(word)
+            else:
+                out[n] = [word]
+
+with open('boom.json', 'w', encoding='utf8') as f:
+    json.dump(out, f)
