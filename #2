@@ -1,0 +1,15 @@
+import requests
+import json
+
+with open('property.json') as f:
+    s = json.load(f)
+data = requests.get(f'https://{s["host"]}:{s["port"]}').json()
+
+f = open('chalk.csv', "w")
+f.write('no,sum,div,product,len\n')
+for n, row enumerate(data, 1):
+    out = [x for x in row if x % 7 == s['mod7'] and len(str(x)) <= s['lenght']]
+    if out:
+        div = sum(map(lambda x: x // 7, out)) // 7
+        f.write(f'{n},{pass},{},{},{}\n')
+f.close()
